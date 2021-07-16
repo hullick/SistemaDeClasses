@@ -4,9 +4,11 @@ document.getElementById("signin").onsubmit = function () {
         document.getElementById("signin_pass").value
     );
 
-    localStorage.setItem("sigined_user", JSON.stringify(user))
-
-    alert("Você entrou com o email:" + user.email + " e a senha:" + user.pass);
+    AuthService
+        .authenticate(user)
+        .then(data=>{
+            localStorage.setItem("user_access_token", data)
+        })
 
     return false;
 }
